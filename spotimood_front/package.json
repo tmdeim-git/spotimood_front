@@ -10,6 +10,9 @@
     "preview": "vite preview --host"
   },
   "dependencies": {
+    "@emotion/react": "^11.11.3",
+    "@emotion/styled": "^11.11.0",
+    "@mui/material": "^5.15.5",
     "@react-three/drei": "^9.96.1",
     "@splinetool/loader": "^1.0.31",
     "@splinetool/r3f-spline": "^1.0.2",

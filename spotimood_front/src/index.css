@@ -129,9 +129,13 @@ video {
   justify-content: center;
 }
 
+.slider-title{
+  padding-top: 1rem;
+}
+
 .home_text {
   width: 100%;
-  height: 30%;
+  height: 40%;
   bottom: 0;
   position: absolute;
   display: flex;
@@ -247,6 +251,10 @@ video {
 
 .loading_gpt {
   color: white
+}
+
+.MuiSlider-markLabel {
+  color: white !important;
 }
 
 
