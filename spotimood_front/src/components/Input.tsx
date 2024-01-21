@@ -13,13 +13,13 @@ export default function Input() {
     songs: [],
     name: "",
   };
-  let link = "";
+  const [link, setLink] = useState("");
 
   async function generatePlaylist(mood: string) {
     setIsLoading(true);
     await axios
       .post(
-        "http://192.168.68.122:8080/generate",
+        "http://172.30.182.167:8080/generate",
         {
           mood: mood,
         },
@@ -33,7 +33,7 @@ export default function Input() {
 
     await axios
       .post(
-        "http://192.168.68.147:3000/generatePlaylist",
+        "http://172.30.177.254:3000/generatePlaylist",
         {
           ...playlist,
         },
@@ -41,9 +41,10 @@ export default function Input() {
       )
       .then((response) => {
         console.log(response.data);
-        link = response.data.link;
+        setLink(response.data.playlistUrl);
       });
     setIsLoading(false);
+    setReceived(true);
   }
 
   return (
@@ -56,13 +57,11 @@ export default function Input() {
         e.target[0].value = "";
       }}
     >
-        {!isLoading && received ? (
-            link )}
-      {isLoading ? (
+      {isLoading && !received ? (
         <div className="loading_gpt">
             Your playlist is being generated...
         </div>
-      ) : (
+      ) : !isLoading && !received ? (
         <>
           <h2>How is your mood today?</h2>
           <label className="input">
@@ -72,7 +71,9 @@ export default function Input() {
             <button>Send</button>
           </div>
         </>
-      )}
+      ) : (
+          <><a className="playlist" href={link}>Your Playlist</a><div className="generate_playlist" onClick={() => setReceived(false)}>Generate another playlist</div></>
+          )}
     </form>
   );
 }
