@@ -20,6 +20,7 @@ export default function App() {
     name: "",
   };
   const [link, setLink] = useState("");
+  const [buttonVis, setButtonVis] = useState(false);
 
   async function generatePlaylist(mood: string, songs: string) {
     setIsLoading(true);
@@ -51,6 +52,10 @@ export default function App() {
         setTimeout(() => {
           setLink(response.data.playlistUrl);
         }, 2000);
+        setTimeout(() => {
+          setButtonVis(true);
+        }
+        , 3000);
       });
     setIsLoading(false);
     setReceived(true);
@@ -83,7 +88,7 @@ export default function App() {
                 e.target[1].value = "";
               }}
             >
-              {isLoading && !received ? (
+              {isLoading && !received && buttonVis ? (
                 <div className="loading_gpt">
                   Your playlist is being generated...
                 </div>
@@ -114,7 +119,8 @@ export default function App() {
                   </div>
                 </>
               ) : (
-                <>
+                buttonVis &&                 
+                  <>
                   <a className="playlist" href={link} target="_blank">
                     Open in Spotify
                   </a>
@@ -125,9 +131,10 @@ export default function App() {
                       setLink("");
                     }}
                   >
-                    Generate another playlist
+                    &#60;Generate another playlist
                   </div>
                 </>
+
               )}
             </form>
           </div>

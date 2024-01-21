@@ -72,6 +72,7 @@ h1 {
   padding-top: 1rem;
   cursor: pointer;
   font-weight: 700;
+  text-decoration: underline;
 }
 
 .prop {
